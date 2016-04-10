@@ -160,9 +160,25 @@ public class KB {
         return cond;
     }
 
-    public static String[][] data() // Knowledge Base , SRC , DEST , Time_To_Reach
+    public static String[][] data() throws FileNotFoundException, IOException // Knowledge Base , SRC , DEST , Time_To_Reach
     {
         String[][] space = new String[20][3];
+        
+        String csvFile = "source-destination.csv";
+	BufferedReader br = null;
+	String line = "";
+	String cvsSplitBy = ",";
+        br = new BufferedReader(new FileReader(csvFile));
+        line = br.readLine();
+        int counter=0;
+        while ((line = br.readLine()) != null) {
+            String[] country = line.split(cvsSplitBy);
+                space[counter][0]=country[1];
+                space[counter][1]=country[2];
+                space[counter][2]=country[3];
+                counter++;
+        }
+        /*
         space[0][0] = "karachi";
         space[0][1] = "islamabad";
         space[0][2] = "2";
@@ -232,7 +248,15 @@ public class KB {
         space[19][0] = "quetta";
         space[19][1] = "islamabad";
         space[19][2] = "1";
-
+     
+        for(int i=0;i<20;i++){
+            for(int j=0;j<3;j++){
+                if(space[i][j].equals(space_check[i][j]))
+                    System.out.println("match");
+                else
+                    System.out.println("not match");
+            }
+        }*/
         return space;
     }
 
@@ -357,64 +381,46 @@ public class KB {
         return total;
     }
 
-    public static void show_final(String[][] p, int total) throws IOException // printing Variables
+    public static void show_final(String[][] p, int total) // printing Variables
     {
-        
-        FileWriter writer = new FileWriter("output.csv");
-            writer.append("S.NO");
-	    writer.append(',');
-	    writer.append("Source");
-	    writer.append(',');
-	    writer.append("Destination");
-	    writer.append(',');
-            writer.append("Start time");
-	    writer.append(',');
-	    writer.append("End time");
-	    writer.append('\n');
+
         //  p=BubbleSort(p,total);
-        int k = 1;
-        for (int i = 0; i < total; i++) {
-            writer.append(""+k++);
-            writer.append(',');
-            System.out.print(p[i][0]);
-            writer.append(',');
-            System.out.print(p[i][1]);
-            writer.append(',');
-            System.out.print(p[i][2]);
-            writer.append(',');
-            System.out.print(p[i][3]);
-            writer.append('\n');
-            System.out.println();
-        }
-        writer.flush();
-        writer.close();
-    }
-    
-    public static void Pre_process(String[][] p, int total) throws IOException// Variables Output Conversion ,, to time :  25->15m, 75->45m , 50->30m
-    {
-        //  p=BubbleSort(p,total);
-        FileWriter writer = new FileWriter("output.csv");
-            writer.append("S.NO");
-	    writer.append(',');
-	    writer.append("Source");
-	    writer.append(',');
-	    writer.append("Destination");
-	    writer.append(',');
-            writer.append("Start time");
-	    writer.append(',');
-	    writer.append("End time");
-	    writer.append('\n');
-        //  p=BubbleSort(p,total);
-        
+        System.out.print("Source-----Destination-----Start_time-----End_time");
         System.out.println();
         int k = 1;
         for (int i = 0; i < total; i++) {
-            writer.append(""+k++);
-            writer.append(',');
-            writer.append(p[i][0]);
-            writer.append(',');
-            writer.append(p[i][1]);
-            writer.append(',');
+            System.out.print(k++ + "--");
+            System.out.print("--" + p[i][0] + "--");
+            System.out.print("--" + p[i][1] + "--");
+            System.out.print("--" + p[i][2] + "--");
+            System.out.print("--" + p[i][3] + "--");
+            System.out.println();
+        }
+    }
+
+    public static void Pre_process(String[][] p, int total) throws IOException// Variables Output Conversion ,, to time :  25->15m, 75->45m , 50->30m
+    {
+        //  p=BubbleSort(p,total);
+        FileWriter write = new FileWriter("output.csv");
+        
+        write.append("S.No");
+        write.append(',');
+        write.append("Source");
+        write.append(',');
+        write.append("Destination");
+        write.append(',');
+        write.append("Start time");
+        write.append(',');
+        write.append("End time");
+        write.append(',');
+        int k = 1;
+        for (int i = 0; i < total; i++) {
+            write.append(""+k++);
+            write.append(',');
+            write.append(p[i][0]);
+            write.append(',');
+            write.append(p[i][1]);
+            write.append(',');
             
             double x, y, x1, x2;
             String a = p[i][2];
@@ -451,17 +457,17 @@ public class KB {
             if (y == 0) {
                 y = 0;
             }
-            writer.append("<" + arr[0] + ":" + (int) (x) + ">  ");
-            writer.append(',');
-            writer.append("<" + arr1[0] + ":" + (int) (y) + ">");
-            writer.append('\n');
+            write.append("<" + arr[0] + ":" + (int) (x) + ">  ");
+            write.append(',');
+            write.append("<" + arr1[0] + ":" + (int) (y) + ">");
+            write.append('\n');
         }
-        writer.flush();
-        writer.close();
-        
+        write.flush();
+        write.close();
+
     }
 
-    public static double fetch_time(String a, String b)// Getting Time to reach from Src to Dest
+    public static double fetch_time(String a, String b) throws IOException// Getting Time to reach from Src to Dest
     {
         double L = 0;
         String[][] space = data();
