@@ -31,7 +31,8 @@ public class AI_Project {
             time = KB.fetch_time(src, dest); // Get Time to reach from source to destination
 
             a = new double[2];
-            if (ind > 0) {
+            if (ind > 0) 
+            {
                 a = k.get_domain(variables, ind, src, dest, time);     // gettting domain values [start and end time]
             } else {
                 a[0] = 0;
@@ -47,7 +48,8 @@ public class AI_Project {
                 if (ind == total) {
                     ind = 0;
                 }
-            } else // Cant assign value to domain ,,
+            }
+            else // Cant assign value to domain ,,
             {
                 variables[ind][2] = Double.toString(-1); // start_time
                 variables[ind][3] = Double.toString(-1); //end_time
