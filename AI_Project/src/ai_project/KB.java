@@ -128,7 +128,7 @@ public class KB {
         return variables;
     }
 
-    public static String[][] start_variable(String[][] variables)// initialization purpose
+    public static String[][] start_variable(String[][] variables) throws IOException// initialization purpose
     {
         int m = 0, n = 0;
         int itr;
@@ -178,89 +178,10 @@ public class KB {
             space[counter][2] = country[3];
             counter++;
         }
-        /*
-         space[0][0] = "karachi";
-         space[0][1] = "islamabad";
-         space[0][2] = "2";
-         space[1][0] = "islamabad";
-         space[1][1] = "karachi";
-         space[1][2] = "2";
-
-         space[2][0] = "karachi";
-         space[2][1] = "lahore";
-         space[2][2] = "2";
-         space[3][0] = "lahore";
-         space[3][1] = "karachi";
-         space[3][2] = "2";
-
-         space[4][0] = "karachi";
-         space[4][1] = "peshawar";
-         space[4][2] = "2";
-         space[5][0] = "peshawar";
-         space[5][1] = "karachi";
-         space[5][2] = "2";
-
-         space[6][0] = "karachi";
-         space[6][1] = "quetta";
-         space[6][2] = "2";
-         space[7][0] = "quetta";
-         space[7][1] = "karachi";
-         space[7][2] = "2";
-
-         space[8][0] = "lahore";
-         space[8][1] = "peshawar";
-         space[8][2] = "1";
-         space[9][0] = "peshawar";
-         space[9][1] = "lahore";
-         space[9][2] = "1";
-
-         space[10][0] = "lahore";
-         space[10][1] = "islamabad";
-         space[10][2] = "1";
-         space[11][0] = "islamabad";
-         space[11][1] = "lahore";
-         space[11][2] = "1";
-
-         space[12][0] = "lahore";
-         space[12][1] = "quetta";
-         space[12][2] = "2";
-         space[13][0] = "quetta";
-         space[13][1] = "lahore";
-         space[13][2] = "2";
-
-         space[14][0] = "peshawar";
-         space[14][1] = "islamabad";
-         space[14][2] = "2";
-         space[15][0] = "islamabad";
-         space[15][1] = "peshawar";
-         space[15][2] = "2";
-
-         space[16][0] = "peshawar";
-         space[16][1] = "quetta";
-         space[16][2] = "2";
-         space[17][0] = "quetta";
-         space[17][1] = "peshawar";
-         space[17][2] = "2";
-
-         space[18][0] = "islamabad";
-         space[18][1] = "quetta";
-         space[18][2] = "1";
-         space[19][0] = "quetta";
-         space[19][1] = "islamabad";
-         space[19][2] = "1";
-     
-         for(int i=0;i<20;i++){
-         for(int j=0;j<3;j++){
-         if(space[i][j].equals(space_check[i][j]))
-         System.out.println("match");
-         else
-         System.out.println("not match");
-         }
-         }*/
-        return space;
+                return space;
     }
 
-    public static String[][] input_KB() // User Input
+    public static String[][] input_KB() throws FileNotFoundException, IOException // User Input
     {
         int i = 15;
         String a = Integer.toString(i);
@@ -268,8 +189,26 @@ public class KB {
         int j = 10;
         String b = Integer.toString(j);
 
-        String[][] space = new String[20][3];
-
+        String[][] space = new String[25][4];
+        
+        String csvFile = "planes_amount.csv";
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        br = new BufferedReader(new FileReader(csvFile));
+        line = br.readLine();
+        int counter = 0;
+        while ((line = br.readLine()) != null) {
+            String[] country = line.split(cvsSplitBy);
+            space[counter][0] = country[1];
+            space[counter][1] = country[2];
+            space[counter][2] = country[3];
+            
+            System.out.println(space[counter][0]+"  "+space[counter][1]+"  "+space[counter][2]);
+            counter++;
+        }
+        System.out.println(counter);
+        /*
         space[0][0] = "karachi";
         space[0][1] = "islamabad";
         space[0][2] = "15";
@@ -334,7 +273,7 @@ public class KB {
         space[19][0] = "quetta";
         space[19][1] = "islamabad";
         space[19][2] = "10";
-
+*/
         pre_process_input(space);
 
         return space;
@@ -369,7 +308,7 @@ public class KB {
 
     }
 
-    public static int input_KB_total() // FInding Total Number of Flights in Input
+    public static int input_KB_total() throws IOException // FInding Total Number of Flights in Input
     {
         int total = 0;
         String[][] space = input_KB();
@@ -679,3 +618,86 @@ public class KB {
         return src;
     }
 }
+
+
+
+
+/*
+         space[0][0] = "karachi";
+         space[0][1] = "islamabad";
+         space[0][2] = "2";
+         space[1][0] = "islamabad";
+         space[1][1] = "karachi";
+         space[1][2] = "2";
+
+         space[2][0] = "karachi";
+         space[2][1] = "lahore";
+         space[2][2] = "2";
+         space[3][0] = "lahore";
+         space[3][1] = "karachi";
+         space[3][2] = "2";
+
+         space[4][0] = "karachi";
+         space[4][1] = "peshawar";
+         space[4][2] = "2";
+         space[5][0] = "peshawar";
+         space[5][1] = "karachi";
+         space[5][2] = "2";
+
+         space[6][0] = "karachi";
+         space[6][1] = "quetta";
+         space[6][2] = "2";
+         space[7][0] = "quetta";
+         space[7][1] = "karachi";
+         space[7][2] = "2";
+
+         space[8][0] = "lahore";
+         space[8][1] = "peshawar";
+         space[8][2] = "1";
+         space[9][0] = "peshawar";
+         space[9][1] = "lahore";
+         space[9][2] = "1";
+
+         space[10][0] = "lahore";
+         space[10][1] = "islamabad";
+         space[10][2] = "1";
+         space[11][0] = "islamabad";
+         space[11][1] = "lahore";
+         space[11][2] = "1";
+
+         space[12][0] = "lahore";
+         space[12][1] = "quetta";
+         space[12][2] = "2";
+         space[13][0] = "quetta";
+         space[13][1] = "lahore";
+         space[13][2] = "2";
+
+         space[14][0] = "peshawar";
+         space[14][1] = "islamabad";
+         space[14][2] = "2";
+         space[15][0] = "islamabad";
+         space[15][1] = "peshawar";
+         space[15][2] = "2";
+
+         space[16][0] = "peshawar";
+         space[16][1] = "quetta";
+         space[16][2] = "2";
+         space[17][0] = "quetta";
+         space[17][1] = "peshawar";
+         space[17][2] = "2";
+
+         space[18][0] = "islamabad";
+         space[18][1] = "quetta";
+         space[18][2] = "1";
+         space[19][0] = "quetta";
+         space[19][1] = "islamabad";
+         space[19][2] = "1";
+     
+         for(int i=0;i<20;i++){
+         for(int j=0;j<3;j++){
+         if(space[i][j].equals(space_check[i][j]))
+         System.out.println("match");
+         else
+         System.out.println("not match");
+         }
+         }*/

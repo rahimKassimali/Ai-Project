@@ -1,6 +1,21 @@
-S.No,Source_Airport,Number_of_planes_avaliable
-1,Karachi,10
-2,lahore,10
-3,peshawar,10
-4,islamabad,10
-5,quetta,10
+S.No,Source_Airport,destination,number of flights
+1,karachi,islamabad,10
+2,karachi,lahore,10
+3,karachi,peshawar,10
+4,karachi,quetta,10
+5,islamabad,karachi,10
+6,islamabad,lahore,10
+7,islamabad,peshawar,10
+8,islamabad,quetta,10
+9,lahore,karachi,10
+10,lahore,peshawar,10
+11,lahore,islamabad,10
+12,lahore,quetta,10
+13,peshawar,karachi,10
+14,peshawar,lahore,10
+15,peshawar,islamabad,10
+16,peshawar,quetta,10
+17,quetta,karachi,10
+18,quetta,lahore,10
+19,quetta,peshawar,10
+20,quetta,islamabad,10
